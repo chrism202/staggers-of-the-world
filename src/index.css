@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.seed-button {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.seed-button:hover {
+  background: #2980b9;
+}
+
+.user-selection {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.user-selection label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.user-selection select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.user-selection select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.current-assignment {
+  background: #e8f4f8;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3498db;
+}
+
+.leave-button {
+  margin-left: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.leave-button:hover {
+  background: #c0392b;
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.car-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.car-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.car-card.current {
+  border: 3px solid #3498db;
+}
+
+.car-card h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #eee;
+}
+
+.ferry-time {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ferry-time label {
+  font-weight: 500;
+  color: #666;
+}
+
+.ferry-time select {
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.passengers h3 {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.passengers ul {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.passengers li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.passengers li:last-child {
+  border-bottom: none;
+}
+
+.passengers li.you {
+  font-weight: 600;
+  color: #3498db;
+}
+
+.passengers .empty {
+  color: #999;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.join-button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.join-button:hover {
+  background: #219a52;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .user-selection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-selection select {
+    width: 100%;
+  }
+
+  .cars-grid {
+    grid-template-columns: 1fr;
+  }
+}
