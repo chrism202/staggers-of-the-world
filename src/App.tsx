@@ -18,8 +18,6 @@ type GolfingAbility = "single_digit" | "mid_handicapper" | "high_handicapper" | 
 type Tab = "people" | "cars" | "calendar";
 
 function App() {
-  const [selectedAttendeeId, setSelectedAttendeeId] =
-    useState<Id<"attendees"> | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("people");
   const [newCarName, setNewCarName] = useState("");
   const [editingLeavingFrom, setEditingLeavingFrom] = useState<Id<"cars"> | null>(null);
@@ -37,21 +35,6 @@ function App() {
   const addCar = useMutation(api.cars.addCar);
   const removeCar = useMutation(api.cars.removeCar);
   const setLeavingFrom = useMutation(api.cars.setLeavingFrom);
-
-  const selectedAttendee = attendees?.find((a) => a._id === selectedAttendeeId);
-  const currentCar = carsWithAttendees?.find(
-    (c) => c._id === selectedAttendee?.carId
-  );
-
-  const handleJoinCar = async (carId: Id<"cars">) => {
-    if (!selectedAttendeeId) return;
-    await assignToCar({ attendeeId: selectedAttendeeId, carId });
-  };
-
-  const handleLeaveCar = async () => {
-    if (!selectedAttendeeId) return;
-    await removeFromCar({ attendeeId: selectedAttendeeId });
-  };
 
   const handleFerryTimeChange = async (
     carId: Id<"cars">,
@@ -226,7 +209,7 @@ function App() {
             {carsWithAttendees.map((car) => (
               <div
                 key={car._id}
-                className={`car-card ${currentCar?._id === car._id ? "current" : ""}`}
+                className="car-card"
               >
                 <div className="car-header">
                   <h2>{car.name}</h2>
@@ -289,15 +272,7 @@ function App() {
                   {car.attendees.length > 0 ? (
                     <ul>
                       {car.attendees.map((attendee) => (
-                        <li
-                          key={attendee._id}
-                          className={
-                            attendee._id === selectedAttendeeId ? "you" : ""
-                          }
-                        >
-                          {attendee.name}
-                          {attendee._id === selectedAttendeeId && " (you)"}
-                        </li>
+                        <li key={attendee._id}>{attendee.name}</li>
                       ))}
                     </ul>
                   ) : (
