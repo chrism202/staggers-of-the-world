@@ -26,3 +26,24 @@ export const removeFromCar = mutation({
     await ctx.db.patch(args.attendeeId, { carId: undefined });
   },
 });
+
+export const updateGolfInfo = mutation({
+  args: {
+    attendeeId: v.id("attendees"),
+    golfingAbility: v.optional(
+      v.union(
+        v.literal("single_digit"),
+        v.literal("mid_handicapper"),
+        v.literal("high_handicapper"),
+        v.literal("never_played")
+      )
+    ),
+    bringingClubs: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.attendeeId, {
+      golfingAbility: args.golfingAbility,
+      bringingClubs: args.bringingClubs,
+    });
+  },
+});

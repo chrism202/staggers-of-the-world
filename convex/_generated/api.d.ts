@@ -10,6 +10,7 @@
 
 import type * as attendees from "../attendees.js";
 import type * as cars from "../cars.js";
+import type * as events from "../events.js";
 import type * as seed from "../seed.js";
 
 import type {
@@ -21,6 +22,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   attendees: typeof attendees;
   cars: typeof cars;
+  events: typeof events;
   seed: typeof seed;
 }>;
 

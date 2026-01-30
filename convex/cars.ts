@@ -43,3 +43,48 @@ export const clearFerryTime = mutation({
     await ctx.db.patch(args.carId, { ferryTime: undefined });
   },
 });
+
+export const addCar = mutation({
+  args: {
+    name: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const carId = await ctx.db.insert("cars", {
+      name: args.name,
+      ferryTime: undefined,
+    });
+    return carId;
+  },
+});
+
+export const removeCar = mutation({
+  args: {
+    carId: v.id("cars"),
+  },
+  handler: async (ctx, args) => {
+    // Reassign all passengers to unassigned (remove from car)
+    const passengers = await ctx.db
+      .query("attendees")
+      .withIndex("by_car", (q) => q.eq("carId", args.carId))
+      .collect();
+
+    for (const passenger of passengers) {
+      await ctx.db.patch(passenger._id, { carId: undefined });
+    }
+
+    // Delete the car
+    await ctx.db.delete(args.carId);
+  },
+});
+
+export const setLeavingFrom = mutation({
+  args: {
+    carId: v.id("cars"),
+    leavingFrom: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.carId, {
+      leavingFrom: args.leavingFrom || undefined,
+    });
+  },
+});
